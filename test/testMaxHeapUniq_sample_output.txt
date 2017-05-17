@@ -1,0 +1,34 @@
+ashanker@ashanker-MacBookAir:~/git_personal/heap/test$ ./testMaxHeapUniq 5
+Sorted Heap: PrintHeap():	1156462227(4)	921455020(3)	1035936153(2)	467312835(1)	1044937754(0)	
+Max Heap: PrintHeap():	1156462227(4)	921455020(3)	1035936153(2)	1044937754(0)	467312835(1)	
+Print Heap Key(sorted Heap): Heap Keys:	4	3	2	1	0	
+Print Heap Key(Max Heap): Heap Keys:	4	3	2	0	1	
+heap.c:PrintNodeKey:72: Node(key) = 4
+Data(item): 1156462227, Node(key): 4
+heap.c:PrintNodeKey:72: Node(key) = 4
+Data(item): 1156462227, Node(key): 4
+Max Heap: PrintHeap():	921455020(3)	467312835(1)	1035936153(2)	1044937754(0)	
+heap.c:PrintNodeKey:72: Node(key) = 3
+Data(item): 921455020, Node(key): 3
+heap.c:PrintNodeKey:72: Node(key) = 3
+Data(item): 921455020, Node(key): 3
+Max Heap: PrintHeap():	1035936153(2)	467312835(1)	1044937754(0)	
+heap.c:PrintNodeKey:72: Node(key) = 2
+Data(item): 1035936153, Node(key): 2
+heap.c:PrintNodeKey:72: Node(key) = 2
+Data(item): 1035936153, Node(key): 2
+Max Heap: PrintHeap():	467312835(1)	1044937754(0)	
+heap.c:PrintNodeKey:72: Node(key) = 1
+Data(item): 467312835, Node(key): 1
+heap.c:PrintNodeKey:72: Node(key) = 1
+Data(item): 467312835, Node(key): 1
+Max Heap: PrintHeap():	1044937754(0)	
+heap.c:PrintNodeKey:72: Node(key) = 0
+Data(item): 1044937754, Node(key): 0
+heap.c:PrintNodeKey:72: Node(key) = 0
+Data(item): 1044937754, Node(key): 0
+Heap is empty
+Max Heap: Test Passed Successfully
+heap.c:PrintHeapKey:30: Heap is NULL
+ashanker@ashanker-MacBookAir:~/git_personal/heap/test$ 
+

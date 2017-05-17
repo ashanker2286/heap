@@ -1,0 +1,33 @@
+ashanker@ashanker-MacBookAir:~/git_personal/heap/test$ ./testMinHeap 5
+Sorted Heap: PrintHeap():	1805727162(0)	1242036958(0)	517462520(3)	2136268730(4)	1828429521(4)	
+Min Heap: PrintHeap():	1805727162(0)	1242036958(0)	1828429521(4)	2136268730(4)	517462520(3)	
+Print Heap Key(sorted Heap): Heap Keys:	0	0	3	4	4	
+Print Heap Key(Min Heap): Heap Keys:	0	0	4	4	3	
+heap.c:PrintNodeKey:72: Node(key) = 0
+Data(item): 1805727162, Node(key): 0
+heap.c:PrintNodeKey:72: Node(key) = 0
+Data(item): 1805727162, Node(key): 0
+Min Heap: PrintHeap():	1242036958(0)	517462520(3)	1828429521(4)	2136268730(4)	
+heap.c:PrintNodeKey:72: Node(key) = 0
+Data(item): 1242036958, Node(key): 0
+heap.c:PrintNodeKey:72: Node(key) = 0
+Data(item): 1242036958, Node(key): 0
+Min Heap: PrintHeap():	517462520(3)	2136268730(4)	1828429521(4)	
+heap.c:PrintNodeKey:72: Node(key) = 3
+Data(item): 517462520, Node(key): 3
+heap.c:PrintNodeKey:72: Node(key) = 3
+Data(item): 517462520, Node(key): 3
+Min Heap: PrintHeap():	1828429521(4)	2136268730(4)	
+heap.c:PrintNodeKey:72: Node(key) = 4
+Data(item): 1828429521, Node(key): 4
+heap.c:PrintNodeKey:72: Node(key) = 4
+Data(item): 1828429521, Node(key): 4
+Min Heap: PrintHeap():	2136268730(4)	
+heap.c:PrintNodeKey:72: Node(key) = 4
+Data(item): 2136268730, Node(key): 4
+heap.c:PrintNodeKey:72: Node(key) = 4
+Data(item): 2136268730, Node(key): 4
+Heap is empty
+Min Heap: Test Passed Successfully
+heap.c:PrintHeapKey:30: Heap is NULL
+
