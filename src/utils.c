@@ -1,5 +1,6 @@
 #include <heap.h>
 
+// Swap Elements in a given heap
 void swap(Heap_t **heapPtr, int i, int j) {
 	Node_t *temp = NULL;
 

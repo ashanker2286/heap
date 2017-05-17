@@ -3,7 +3,7 @@ RM = rm -f
 LDFLAGS = -L../lib/ -lheap -Wl,-rpath,../lib/
 CFLAGS = -O0 -g -I../include/ -I.
 
-TARGET_BIN = testMinHeap testMaxHeap
+TARGET_BIN = testMinHeap testMaxHeap testMinHeapUniq testMaxHeapUniq
     
 #SRCS = test1.c
 #OBJS = $(SRCS:.c=.o)
@@ -25,6 +25,18 @@ testMinHeap: testMinHeap.o utils.o test.o
 
 testMinHeap.o: testMinHeap.c
 	$(CC) $(CFLAGS) -c -o testMinHeap.o testMinHeap.c
+
+testMinHeapUniq: testMinHeapUniq.o utils.o test.o
+	$(CC) -o testMinHeapUniq testMinHeapUniq.o utils.o test.o $(LDFLAGS)
+
+testMinHeapUniq.o: testMinHeapUniq.c
+	$(CC) $(CFLAGS) -c -o testMinHeapUniq.o testMinHeapUniq.c
+
+testMaxHeapUniq: testMaxHeapUniq.o utils.o test.o
+	$(CC) -o testMaxHeapUniq testMaxHeapUniq.o utils.o test.o $(LDFLAGS)
+
+testMaxHeapUniq.o: testMaxHeapUniq.c
+	$(CC) $(CFLAGS) -c -o testMaxHeapUniq.o testMaxHeapUniq.c
 
 utils.o: utils.c
 	$(CC) $(CFLAGS) -c -o utils.o utils.c

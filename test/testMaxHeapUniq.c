@@ -1,17 +1,18 @@
 #include <heap.h>
 #include <test.h>
 
-extern void initRandNumGen(void);
-extern int randomNumGen(int num);
+extern void initRandNumGenUniq(int num);
+extern void deinitRandNumGenUniq();
+extern int randomNumGenUniq(int num);
 extern Data_t* allocateData();
 extern void PrintData(Node_t *node);
 extern void PrintHeap(Heap_t *heap);
 extern int InsertIntoHeap(Heap_t **heapPtr, void *data, int key);
-extern void sortHeapInIncreasingOrder(Heap_t **heapPtr, int size);
+extern void sortHeapInDecreasingOrder(Heap_t **heapPtr, int size);
 
 
 void print_usage() {
-	printf("./testMinHeap <num of elements>\n");
+	printf("./testMaxHeapUniq <num of elements>\n");
 	return;
 }
 
@@ -23,6 +24,7 @@ int main(int argc, char *argv[]) {
 	int randomNum = 0;
 	int i = 0;
 	Data_t *data = NULL;
+	Data_t *sData = NULL;
 
 	if (argc != 2) {
 		fprintf(stderr, "Invalid argument\n");
@@ -46,40 +48,46 @@ int main(int argc, char *argv[]) {
                 return -1;
         }
 
-	initRandNumGen();
+	initRandNumGenUniq(numOfElements);
 	for (i = 0; i < numOfElements; i++) {
 		data = allocateData();
-               	randomNum = randomNumGen(numOfElements);
-               	InsertIntoMinHeap(&heap, (void *)data, randomNum);
+               	randomNum = randomNumGenUniq(numOfElements);
+               	InsertIntoMaxHeap(&heap, (void *)data, randomNum);
                	InsertIntoHeap(&sortedHeap, (void *)data, randomNum);
 	}
 
-        sortHeapInIncreasingOrder(&sortedHeap, numOfElements);
+        sortHeapInDecreasingOrder(&sortedHeap, numOfElements);
         printf("Sorted Heap: ");
         PrintHeap(sortedHeap);
-        printf("Min Heap: ");
+        printf("Max Heap: ");
         PrintHeap(heap);
         printf("Print Heap Key(sorted Heap): ");
         PrintHeapKey(sortedHeap);
-        printf("Print Heap Key(Min Heap): ");
+        printf("Print Heap Key(Max Heap): ");
         PrintHeapKey(heap);
 	i = 0;
         for (i = 0; i < numOfElements; i++) {
-                node = GetMinNode(heap);
+                node = GetMaxNode(heap);
                 PrintNodeKey(node);
                 PrintData(node);
                 if (node->key != sortedHeap->node[i]->key) {
                         fprintf(stderr, "Test Failed !!\n");
                         goto cleanUp;
                 }
-                node = ExtractMin(&heap);
+                node = ExtractMax(&heap);
                 PrintNodeKey(node);
                 PrintData(node);
                 if (node->key != sortedHeap->node[i]->key) {
                         fprintf(stderr, "Test Failed !!\n");
                         goto cleanUp;
                 }
-                printf("Min Heap: ");
+		sData = (Data_t *)(sortedHeap->node[i]->data);
+		data = (Data_t *)(node->data);
+		if (sData->item != data->item) {
+                        fprintf(stderr, "Test Failed !!\n");
+                        goto cleanUp;
+		}
+                printf("Max Heap: ");
                 PrintHeap(heap);
         }
         printf("Test Passed Successfully\n");
@@ -87,6 +95,7 @@ int main(int argc, char *argv[]) {
 cleanUp:
         FreeHeap(&heap);
         FreeHeap(&sortedHeap);
+	deinitRandNumGenUniq();
         PrintHeapKey(heap);
 	return 0;
 }

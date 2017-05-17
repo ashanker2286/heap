@@ -1,8 +1,9 @@
 #include <heap.h>
 #include <test.h>
 
-extern void initRandNumGen(void);
-extern int randomNumGen(int num);
+extern void initRandNumGenUniq(int num);
+extern void deinitRandNumGenUniq(void);
+extern int randomNumGenUniq(int num);
 extern Data_t* allocateData();
 extern void PrintData(Node_t *node);
 extern void PrintHeap(Heap_t *heap);
@@ -11,7 +12,7 @@ extern void sortHeapInIncreasingOrder(Heap_t **heapPtr, int size);
 
 
 void print_usage() {
-	printf("./testMinHeap <num of elements>\n");
+	printf("./testMinHeapUniq <num of elements>\n");
 	return;
 }
 
@@ -23,6 +24,7 @@ int main(int argc, char *argv[]) {
 	int randomNum = 0;
 	int i = 0;
 	Data_t *data = NULL;
+	Data_t *sData = NULL;
 
 	if (argc != 2) {
 		fprintf(stderr, "Invalid argument\n");
@@ -46,10 +48,10 @@ int main(int argc, char *argv[]) {
                 return -1;
         }
 
-	initRandNumGen();
+	initRandNumGenUniq(numOfElements);
 	for (i = 0; i < numOfElements; i++) {
 		data = allocateData();
-               	randomNum = randomNumGen(numOfElements);
+               	randomNum = randomNumGenUniq(numOfElements);
                	InsertIntoMinHeap(&heap, (void *)data, randomNum);
                	InsertIntoHeap(&sortedHeap, (void *)data, randomNum);
 	}
@@ -79,6 +81,12 @@ int main(int argc, char *argv[]) {
                         fprintf(stderr, "Test Failed !!\n");
                         goto cleanUp;
                 }
+		sData = (Data_t *)(sortedHeap->node[i]->data);
+		data = (Data_t *)(node->data);
+		if (sData->item != data->item) {
+                        fprintf(stderr, "Test Failed !!\n");
+                        goto cleanUp;
+		}
                 printf("Min Heap: ");
                 PrintHeap(heap);
         }
@@ -87,6 +95,7 @@ int main(int argc, char *argv[]) {
 cleanUp:
         FreeHeap(&heap);
         FreeHeap(&sortedHeap);
+	deinitRandNumGenUniq();
         PrintHeapKey(heap);
 	return 0;
 }

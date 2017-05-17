@@ -2,6 +2,7 @@
 
 extern void swap(Heap_t **heapPtr, int i, int j);
 
+// Insert element into Min Heap
 int InsertIntoMinHeap(Heap_t **heapPtr, void *data, int key) {
 	int i = 0;
 	if ((*heapPtr)->size == (*heapPtr)->capacity) {
@@ -28,6 +29,7 @@ int InsertIntoMinHeap(Heap_t **heapPtr, void *data, int key) {
 	return 0;
 }
 
+// Min Heapify
 int MinHeapify(Heap_t **heapPtr, int idx) {
 	int left = LEFT_CHILD(idx);
 	int right = RIGHT_CHILD(idx);
@@ -47,6 +49,7 @@ int MinHeapify(Heap_t **heapPtr, int idx) {
 	}
 }
 
+// Get Node with Minimum Key
 Node_t* GetMinNode(Heap_t *heap) {
 	if (heap == NULL) {
 		printf("%s:%s:%d: Heap is NULL\n", __FILE__, __func__, __LINE__);
@@ -59,6 +62,7 @@ Node_t* GetMinNode(Heap_t *heap) {
 	return heap->node[0];
 }
 
+// Extract Node with Minimum Key from MinHeap
 Node_t* ExtractMin(Heap_t **heapPtr) {
 	Node_t *node = NULL;
 	if (heapPtr == NULL) {

@@ -6,16 +6,20 @@ extern int randomNumGen(int num);
 extern Data_t* allocateData();
 extern void PrintData(Node_t *node);
 extern void PrintHeap(Heap_t *heap);
+extern int InsertIntoHeap(Heap_t **heapPtr, void *data, int key);
+extern void sortHeapInDecreasingOrder(Heap_t **heapPtr, int size);
 
 void print_usage() {
-	printf("./test1 <num of elements>\n");
+	printf("./testMaxHeap <num of elements>\n");
 	return;
 }
 
 int main(int argc, char *argv[]) {
 	Heap_t *heap = NULL;
+	Heap_t *sortedHeap = NULL;
 	Node_t *node = NULL;
 	int numOfElements = 0;
+	int randomNum = 0;
 	int i = 0;
 	Data_t *data = NULL;
 
@@ -32,23 +36,54 @@ int main(int argc, char *argv[]) {
 	}
 	heap = AllocateHeap(numOfElements);
 	if (heap == NULL) {
-		printf("Unable to Allocate MinHeap\n");
+		printf("Unable to Allocate Heap\n");
+		return -1;
+	}
+	sortedHeap = AllocateHeap(numOfElements);
+	if (sortedHeap == NULL) {
+		printf("Unable to Allocate Heap\n");
 		return -1;
 	}
 	initRandNumGen();
 	for (i = 0; i < numOfElements; i++) {
 		data = allocateData();
-		InsertIntoMaxHeap(&heap, (void *)data, randomNumGen(numOfElements));
+		randomNum = randomNumGen(numOfElements);
+		InsertIntoMaxHeap(&heap, (void *)data, randomNum);
+		InsertIntoHeap(&sortedHeap, (void *)data, randomNum);
 	}
-	node = GetMaxNode(heap);
-	PrintNodeKey(node);
-	PrintHeapKey(heap);
+	sortHeapInDecreasingOrder(&sortedHeap, numOfElements);
+	printf("Sorted Heap: ");
+	PrintHeap(sortedHeap);
+	printf("Max Heap: ");
 	PrintHeap(heap);
-	node = ExtractMax(&heap);
-	PrintNodeKey(node);
-	PrintData(node);
+	printf("Print Heap Key(sorted Heap): ");
+	PrintHeapKey(sortedHeap);
+	printf("Print Heap Key(Max Heap): ");
 	PrintHeapKey(heap);
+	i = 0;
+	for (i = 0; i < numOfElements; i++) {
+		node = GetMaxNode(heap);
+		PrintNodeKey(node);
+		PrintData(node);
+		if (node->key != sortedHeap->node[i]->key) {
+			fprintf(stderr, "Test Failed !!\n");
+			goto cleanUp;
+		}
+		node = ExtractMax(&heap);
+		PrintNodeKey(node);
+		PrintData(node);
+		if (node->key != sortedHeap->node[i]->key) {
+			fprintf(stderr, "Test Failed !!\n");
+			goto cleanUp;
+		}
+		
+		printf("Max Heap: ");
+		PrintHeap(heap);
+	}
+	printf("Test Passed Successfully\n");
+cleanUp:
 	FreeHeap(&heap);
+	FreeHeap(&sortedHeap);
 	PrintHeapKey(heap);
 	return 0;
 }

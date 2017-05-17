@@ -1,18 +1,19 @@
 #include <heap.h>
 
+// Allocate Heap Data Structure
 Heap_t* AllocateHeap(int size) {
 	Heap_t *heap = NULL;
 
 	heap = (Heap_t *)malloc(sizeof(Heap_t));
 	if (heap == NULL) {
-		printf("%s:%s:%d:Malloc Error\n", __FILE__, __func__, __LINE__);
+		fprintf(stderr, "%s:%s:%d:Malloc Error\n", __FILE__, __func__, __LINE__);
 		return NULL;
 	}
 	memset(heap, 0, sizeof(Heap_t));
 	heap->capacity = size;
 	heap->node = (Node_t **)malloc(size * sizeof(Node_t*));
 	if (heap->node == NULL) {
-		printf("%s:%s:%d:heap->node: Malloc Error\n", __FILE__, __func__, __LINE__);
+		fprintf(stderr, "%s:%s:%d:heap->node: Malloc Error\n", __FILE__, __func__, __LINE__);
 		free(heap);
 		return NULL;
 	}
@@ -21,15 +22,16 @@ Heap_t* AllocateHeap(int size) {
 	return heap;
 }
 
+//Print Heap Key
 void PrintHeapKey(Heap_t *heap) {
 	int i = 0;
 
 	if (heap == NULL) {
-		printf("%s:%s:%d: Heap is NULL\n", __FILE__, __func__, __LINE__);
+		fprintf(stderr, "%s:%s:%d: Heap is NULL\n", __FILE__, __func__, __LINE__);
 		return;
 	}
 	if (heap->size == 0) {
-		printf("%s:%s:%d: Heap is empty\n", __FILE__, __func__, __LINE__);
+		fprintf(stderr, "%s:%s:%d: Heap is empty\n", __FILE__, __func__, __LINE__);
 		return;
 	}
 	printf("Heap Keys:\t");
@@ -39,6 +41,7 @@ void PrintHeapKey(Heap_t *heap) {
 	printf("\n");
 }
 
+// Free Heap Data Structure
 void FreeHeap(Heap_t **heapPtr) {
 	int i = 0;
 	if (heapPtr == NULL) {
@@ -60,9 +63,10 @@ void FreeHeap(Heap_t **heapPtr) {
 	return;
 }
 
+// Print Node Key
 void PrintNodeKey(Node_t *node) {
 	if (node == NULL) {
-		printf("%s:%s:%d: Node is NULL\n", __FILE__, __func__, __LINE__);
+		fprintf(stderr, "%s:%s:%d: Node is NULL\n", __FILE__, __func__, __LINE__);
 		return;
 	}
 	printf("%s:%s:%d: Node(key) = %d\n", __FILE__, __func__, __LINE__, node->key);

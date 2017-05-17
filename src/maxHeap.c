@@ -2,6 +2,7 @@
 
 extern void swap(Heap_t **heapPtr, int i, int j);
 
+// Insert element into Max Heap
 int InsertIntoMaxHeap(Heap_t **heapPtr, void *data, int key) {
 	int i = 0;
 	if ((*heapPtr)->size == (*heapPtr)->capacity) {
@@ -28,6 +29,7 @@ int InsertIntoMaxHeap(Heap_t **heapPtr, void *data, int key) {
 	return 0;
 }
 
+// Max Heapify
 int MaxHeapify(Heap_t **heapPtr, int idx) {
 	int left = LEFT_CHILD(idx);
 	int right = RIGHT_CHILD(idx);
@@ -47,6 +49,7 @@ int MaxHeapify(Heap_t **heapPtr, int idx) {
 	}
 }
 
+// Get Node with Maximum Key
 Node_t* GetMaxNode(Heap_t *heap) {
 	if (heap == NULL) {
 		printf("%s:%s:%d: Heap is NULL\n", __FILE__, __func__, __LINE__);
@@ -59,6 +62,7 @@ Node_t* GetMaxNode(Heap_t *heap) {
 	return heap->node[0];
 }
 
+// Extract Node with Maximum Key from MaxHeap
 Node_t* ExtractMax(Heap_t **heapPtr) {
 	Node_t *node = NULL;
 	if (heapPtr == NULL) {
